@@ -1,0 +1,18 @@
+city    Beijing     116.40     39.90
+city    Shanghai    121.47     31.23
+city    Guangzhou   113.27     23.13
+city    Shenzhen    114.05     22.55
+city    Chengdu     104.06     30.67
+city    Xi'an       108.93     34.27
+city    Hangzhou    120.15     30.28
+city    Wuhan       114.30     30.60
+
+route   Beijing     Shanghai    2024-03-21 03:21    2024-03-21 07:21    300.5    4hours            300.5  airplane
+route   Beijing     Guangzhou   2024-03-21 08:00    2024-03-21 12:00    500      4hours            500    airplane
+route   Guangzhou   Shenzhen    2024-03-21 13:00    2024-03-21 14:30    100      1hour30minutes    150    high_speed_way
+route   Shanghai    Shenzhen    2024-03-21 14:00    2024-03-21 18:00    350      4hours            600    airplane
+route   Beijing     Chengdu     2024-03-21 10:00    2024-03-21 14:30    600      4.5hours          600    airplane
+route   Chengdu     Xi'an       2024-03-21 15:30    2024-03-21 17:00    200      1.5hours          200    high_speed_way
+route   Xi'an       Hangzhou    2024-03-21 18:00    2024-03-21 20:30    250      2.5hours          500    airplane
+route   Hangzhou    Wuhan       2024-03-21 21:00    2024-03-21 23:00    150      2hours            300    high_speed_way
+route   Wuhan       Beijing     2024-03-22 00:00    2024-03-22 03:00    350      3hours            350    airplane

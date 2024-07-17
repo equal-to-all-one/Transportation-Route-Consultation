@@ -1,0 +1,12 @@
+city Beijing 116.4074 39.9042
+city Shanghai 121.4737 31.2304
+city Guangzhou 113.2644 23.1291
+
+route Beijing Shanghai 2024-03-21 08:00 2024-03-21 10:00 300 2hours 1000 airplane
+route Shanghai Guangzhou 2024-03-21 10:00 2024-03-21 14:30 300 4hours30minutes 1400 high_speed_way
+route Shanghai Guangzhou 2024-03-21 11:00 2024-03-21 14:30 400 3hours30minutes 1000 high_speed_way
+route Shanghai Guangzhou 2024-03-21 11:00 2024-03-21 15:30 400 4hours30minutes 1000 high_speed_way
+route Shanghai Guangzhou 2024-03-21 12:00 2024-03-21 14:00 500 2hours 1200 high_speed_way
+route Shanghai Guangzhou 2024-03-21 11:00 2024-03-21 13:30 800 2hours30minutes 1200 airplane
+route Shanghai Guangzhou 2024-03-21 11:00 2024-03-21 13:30 800 2hours30minutes 1100 airplane
+route Beijing Guangzhou 2024-03-21 09:00 2024-03-21 11:30 350 2hours30minutes 1800 airplane
