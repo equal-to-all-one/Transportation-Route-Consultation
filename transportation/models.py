@@ -23,8 +23,11 @@ class FlightInfo(models.Model):
     mileage = models.IntegerField(verbose_name="里程")
     depart_time = models.DateTimeField(verbose_name="出发时间")
     arrive_time = models.DateTimeField(verbose_name="到达时间")
-    time_cost = models.DurationField(verbose_name="耗时", null=True, blank=True)  # 后期删掉可为空
+    time_cost = models.DurationField(verbose_name="耗时", null=True, blank=True)
+
+    """
     def __str__(self):
         res = "from: " + str(self.departure_city) + " to: " + str(self.destination_city) + "\n" \
             "$" + str(self.price) + "  " + str(self.depart_time) + "-" + str(self.arrive_time)
         return res
+    """

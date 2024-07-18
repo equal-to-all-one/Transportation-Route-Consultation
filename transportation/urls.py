@@ -11,7 +11,8 @@ router.register('flights', views.FlightViewSet)
 urlpatterns = [
     path('token/', TokenObtainPairView.as_view()),
     path('token/refresh/', TokenRefreshView.as_view()),
-    path('inquire/', views.inquire)
+    # path('csrftoken/', views.get_csrfToken),
+    # path('inquire/', views.inquire)
 ]
 
 urlpatterns += router.urls

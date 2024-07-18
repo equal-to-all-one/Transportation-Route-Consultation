@@ -46,7 +46,7 @@ class CitySerializer(serializers.ModelSerializer):
         return instance
 
 
-class FlightSerializer(serializers.ModelSerializer):
+class FlightSerializer(serializers.ModelSerializer, BulkSerializerMixin):
     departure_city_name=serializers.SerializerMethodField()
     destination_city_name=serializers.SerializerMethodField()
     time_cost=serializers.SerializerMethodField()
@@ -57,6 +57,7 @@ class FlightSerializer(serializers.ModelSerializer):
         extra_kwargs = {
             'time_cost': {'read_only': True}
         }
+        list_serializer_class = BulkListSerializer
 
     def get_departure_city_name(self,obj):
         return obj.departure_city.name
@@ -66,7 +67,7 @@ class FlightSerializer(serializers.ModelSerializer):
     def get_time_cost(self,obj):
         hours, remainder = divmod(obj.time_cost.seconds, 3600)
         minutes, seconds = divmod(remainder, 60)
-        return 'hours: {:02} -- minutes: {:02}'.format(int(hours), int(minutes))
+        return 'hours: {} -- minutes: {:02}'.format(int(hours), int(minutes))
 
     def validate(self, data):
         if data['price'] <= 0:
