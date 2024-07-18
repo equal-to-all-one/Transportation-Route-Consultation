@@ -1,6 +1,7 @@
 #ifndef Transway_h
 #define Transway_h
 
+//交通方式类
 #include<string>
 enum class Transport_Mode {
     none,

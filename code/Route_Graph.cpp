@@ -199,10 +199,13 @@ bool Route_Graph::add_Route(Route& route)
     //寻找起始城市和终点城市的位置，并判断是否存在
     auto start_cityIter = std::find_if(Adjoin_Graph.begin(), Adjoin_Graph.end(), [&](const City& city) { return city.name == route.start_city;});
     auto destination_cityIter = std::find_if(Adjoin_Graph.begin(), Adjoin_Graph.end(), [&](const City& city) { return city.name == route.destination_city;});
+    
     //当起点终点均存在时，执行操作
     if (start_cityIter != Adjoin_Graph.end() && destination_cityIter != Adjoin_Graph.end()) {
         bool found = false;//用来标记是否找到一条已存在的由起点到终点的路线
-        route.set_id(++City::next_route_id);
+        route.set_id(++City::next_route_id);//设置路线id
+
+        //如果已存在路线，则在该路线列表添加新元素
         for (auto& routeList : start_cityIter->route_table) {
             if (!routeList.empty() && routeList.front().destination_city == route.destination_city) {
                 routeList.push_back(route);
@@ -210,6 +213,8 @@ bool Route_Graph::add_Route(Route& route)
                 break;
             }
         }
+
+        //否则，创建新链表添加到并加入起点城市时刻表
         if (!found) {
             std::list<Route> new_Route_List = {route};
             start_cityIter->route_table.push_back(new_Route_List);
@@ -333,6 +338,7 @@ bool Route_Graph::add_City(std::string& city_name, double& longitude, double& al
 bool Route_Graph::delete_City(std::string& city_name)
 {
     auto cityIter = std::find_if(Adjoin_Graph.begin(), Adjoin_Graph.end(), [&](const City& city){return city.name == city_name;});
+    //如果城市存在,执行删除操作
     if (cityIter != Adjoin_Graph.end()) {
         //删除城市
         Adjoin_Graph.erase(cityIter);
@@ -351,6 +357,7 @@ bool Route_Graph::delete_City(std::string& city_name)
                         ++route_iter;
                     }
                 }
+
                 //如果删除后路线列表为空，则删除这个链表
                 if (route_list_iter->empty()) {
                     route_list_iter = city.route_table.erase(route_list_iter);
@@ -390,7 +397,7 @@ void Route_Graph::calculate_Fit_Distance(std::string& origin, std::string& desti
 {
     std::unordered_map<std::string, float> distances; //储存到各城市的最短距离
     std::unordered_map<std::string, std::string> previous_city;//储存最短路径上的前一个城市
-    std::unordered_map<std::string, std::string> previous_arrival_time;
+    std::unordered_map<std::string, std::string> previous_arrival_time;//记录当前城市最短路径的抵达时间
     std::unordered_map<std::string, std::pair<std::string, std::string>> route_times;//记录当前路线的起止时间
     auto cmp = [&](std::string left, std::string right) {return distances[left] > distances[right];};//用于比较两个城市距离的Lambda函数
     std::priority_queue<std::string, std::vector<std::string>, decltype(cmp)> pq(cmp);//优先队列进行最小距离选取
@@ -735,6 +742,7 @@ void Route_Graph::calculate_Fit_Time(std::string& origin, std::string& destinati
             }                    
         }
     }
+
     if (times[destination] == std::numeric_limits<float>::infinity()) {
         std::cout << "No route from " << origin << " to " << destination << "." << std::endl;
     } 

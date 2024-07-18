@@ -28,8 +28,6 @@ struct City
     static int next_route_id;//类静态成员，用来创建城市的标识
 
     // 城市路线时刻表
-    // 无关信息，用于构建邻接表,其中next_route用于构建指向不同城市的链表，而brother_route用于构建两相同城市间的多条路径的链表
-    // 本质是广义表或树的兄弟链储存结构的运用
     std::list<std::list<Route>> route_table;
 };
 

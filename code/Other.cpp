@@ -4,7 +4,6 @@
 //需要注意，在这里，我们只考虑了中转时间小于24小时的情况。
 
 //解析字符串函数
-//这里没有异常处理操作，需要严格按照格式输入
 std::tm parse_Time(const std::string &time)
 {
     std::tm tmp_tm = {};
@@ -15,7 +14,7 @@ std::tm parse_Time(const std::string &time)
     }
     return tmp_tm;
 }
-// "%Y-%m-%d %H:%M"
+
 //计算中转时间
 std::pair<int, int> calculate_Transfer_Time(const std::string &arrival_time_str, const std::string &start_time_str)
 {
@@ -65,6 +64,7 @@ bool read_Administrator_Infomation(std::string &administrator_name, std::string 
         return true;
     }
     else {
+        account_file.close();
         std::cerr << "无法打开身份信息文件" << std::endl;
         return false;
     }

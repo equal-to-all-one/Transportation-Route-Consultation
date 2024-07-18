@@ -69,10 +69,12 @@ void Administrator::delete_Route(Route_Graph &route_graph)
     std::string s;
     int id;
     std::cout << "请输入你想删除路线的起始城市: ";
+    std::cin >> std::ws;
     std::getline(std::cin, s);
     start_city = s;
     s.clear();
     std::cout << "请输入你想删除路线的终点城市: ";
+    std::cin >> std::ws;
     std::getline(std::cin, s);
     destination_city = s;
     s.clear();
@@ -80,13 +82,13 @@ void Administrator::delete_Route(Route_Graph &route_graph)
     int i;
     std::cin >> i;
     if (i == 1) {
-        std::cout << "请输入你想删除路线的id: ";
-        std::cin >> id;
-    }
-    else if (i == 2) {
         route_graph.consult_City(start_city);
         std::cout << "请输入你想删除路线的id: ";
-        std::cin >> id;
+        std::cin >> std::ws >> id;
+    }
+    else if (i == 2) {
+        std::cout << "请输入你想删除路线的id: ";
+        std::cin >> std::ws >> id;
     }
     else {
         std::cout << "无效输入" << std::endl; 
@@ -188,10 +190,13 @@ void Administrator::add_City(Route_Graph &route_graph)
     std::string city_name; 
     double longitude, altitude;
     std::cout << "请输入你想添加城市的名称: ";
+    std::cin >> std::ws;
     std::getline(std::cin, city_name);
     std::cout << "请输入你想添加城市的经度(请输入十进制表示): ";
+    std::cin >> std::ws;
     std::cin >> altitude;
     std::cout << "请输入你想添加城市的纬度(请输入十进制表示): ";
+    std::cin >> std::ws;
     std::cin >> longitude;
     if(route_graph.add_City(city_name, longitude, altitude)) {
         std::cout << "添加成功" << std::endl;
