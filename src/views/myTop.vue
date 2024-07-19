@@ -85,7 +85,7 @@
         </el-col>
       </el-row>
     </el-form>
-    <aRoute :routes="routeLs" style="margin-bottom:50px"></aRoute>
+    <aRoute :routes="routeLs" style="margin-bottom: 50px"></aRoute>
   </div>
 </template>
 
@@ -94,7 +94,7 @@ import aRoute from "../components/aRoute";
 
 export default {
   name: "myTop",
-  components:{ aRoute },
+  components: { aRoute },
   data() {
     const cityRule = (rule, value, callback) => {
       if (
@@ -116,7 +116,7 @@ export default {
     };
     return {
       cityLs: [],
-      routeLs:[],
+      routeLs: [],
       inquireForm: {
         departure_city: "",
         destination_city: "",
@@ -162,17 +162,16 @@ export default {
             method: "post",
             url: "/transportation/flights/inquire/",
             headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${localStorage.getItem("admin_access")}`,
+              "Content-Type": "application/json"
             },
             data: this.inquireForm,
           }).then((res) => {
-            this.routeLs=res.data;
+            this.routeLs = res.data;
+            if (res.data.length === 0) {
+              this.$alert("暂无路线");
+            }
           });
-          if(this.routeLs.length===0)
-          {
-            this.$alert("暂无路线");
-          }
+
           // alert("o(*￣▽￣*)ブ");
         } else {
           // alert("/(ㄒoㄒ)/~~");
@@ -182,7 +181,7 @@ export default {
     },
     resetForm(formName) {
       this.$refs[formName].resetFields();
-      this.routeLs=[];
+      this.routeLs = [];
     },
   },
 };
