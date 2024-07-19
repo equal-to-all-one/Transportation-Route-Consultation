@@ -166,9 +166,9 @@ export default {
               },
               data: list,
             });
+            this.addFormVisible = false;
           });
           // alert("o(*￣▽￣*)ブ");
-          this.addFormVisible = false;
         } else {
           // this.$message.error("/(ㄒoㄒ)/~~");
           return false;

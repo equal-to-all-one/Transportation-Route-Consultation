@@ -177,7 +177,11 @@
         </el-col>
       </el-row>
     </el-form>
-    <aFlight :flights="flightLs" @flightDeleted="deleteAflight" style="margin-bottom:50px"></aFlight>
+    <aFlight
+      :flights="flightLs"
+      @flightDeleted="deleteAflight"
+      style="margin-bottom: 50px"
+    ></aFlight>
   </div>
 </template>
 
@@ -329,11 +333,16 @@ export default {
                 Authorization: `Bearer ${localStorage.getItem("admin_access")}`,
               },
               data: this.addForm,
-            }).then((res) => {
-              console.log(res.data);
-              this.flightLs.push(res.data);
-            });
-            this.addFormVisible = false;
+            })
+              .then((res) => {
+                console.log(res.data);
+                this.flightLs.push(res.data);
+                this.addFormVisible = false;
+              })
+              .catch((error) => {
+                console.log(error);
+                this.$message.warning("航线里程不应小于城市间距离");
+              });
           } else {
             this.filterForm.earliest_time = this.filterForm.time_rangeF[0];
             this.filterForm.latest_time = this.filterForm.time_rangeF[1];

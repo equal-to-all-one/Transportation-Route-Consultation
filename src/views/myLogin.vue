@@ -27,34 +27,37 @@ export default {
       },
     };
   },
-  mounted()
-  {
-    if(this.GLOBAL.hasLogin){
-      localStorage.removeItem('admin_access');
-      localStorage.removeItem('admin_refresh');
+  mounted() {
+    if (this.GLOBAL.hasLogin) {
+      localStorage.removeItem("admin_access");
+      localStorage.removeItem("admin_refresh");
       // alert("已退出登录");
-      this.$message.info("已退出登录");  
-      this.GLOBAL.hasLogin=false;
+      this.$message.info("已退出登录");
+      this.GLOBAL.hasLogin = false;
     }
   },
   methods: {
     submit: function () {
       this.$axios({
-        method:"post",
-        url:"/transportation/token/",
+        method: "post",
+        url: "/transportation/token/",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
-        data:this.form
-      }).then((res)=>{
-        // console.log(res.data);
-        localStorage.setItem('admin_access',res.data.access);
-        localStorage.setItem('admin_refresh',res.data.refresh);
-      });
-      this.GLOBAL.hasLogin=true;
-      // alert("登录成功");
-      this.$message.info("登录成功");
-      this.$router.push({ name: "top" });
+        data: this.form,
+      })
+        .then((res) => {
+          // console.log(res.data);
+          localStorage.setItem("admin_access", res.data.access);
+          localStorage.setItem("admin_refresh", res.data.refresh);
+          this.$message.info("登录成功");
+          this.GLOBAL.hasLogin = true;
+          this.$router.push({ name: "top" });
+        })
+        .catch((error) => {
+          console.log(error);
+          this.$message.warning("密码错误");
+        });
     },
   },
 };
