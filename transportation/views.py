@@ -65,7 +65,7 @@ class FlightViewSet(viewsets.ModelViewSet):
         timecost = serializer.validated_data.get('arrive_time') - serializer.validated_data.get('depart_time')
         serializer.save(time_cost=timecost)
 
-    @action(methods=['post'], detail=False, url_path='inquire')
+    @action(methods=['post'], detail=False, url_path='inquire', permission_classes=[permissions.AllowAny])
     def inquire(self, request, *args, **kwargs):
         departureCity = request.data.get('departure_city')
         destinationCity = request.data.get('destination_city')
