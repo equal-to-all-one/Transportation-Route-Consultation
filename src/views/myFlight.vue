@@ -321,7 +321,6 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          // alert("o(*￣▽￣*)ブ");
           if (formName === "addForm") {
             this.addForm.depart_time = this.addForm.time_range[0];
             this.addForm.arrive_time = this.addForm.time_range[1];
@@ -335,9 +334,10 @@ export default {
               data: this.addForm,
             })
               .then((res) => {
-                console.log(res.data);
                 this.flightLs.push(res.data);
                 this.addFormVisible = false;
+                this.$message.success("新建成功");
+                this.resetForm(formName);
               })
               .catch((error) => {
                 console.log(error);
@@ -359,9 +359,7 @@ export default {
               this.flightLs = res.data;
             });
           }
-          this.resetForm(formName);
         } else {
-          // alert("/(ㄒoㄒ)/~~");
           return false;
         }
       });
@@ -387,9 +385,8 @@ export default {
         },
       }).then((res) => {
         this.flightLs = res.data;
-        console.log(this.flightLs);
+        this.$message.warning("已删除");
       });
-      // console.log("删了(p≧w≦q)");
     },
   },
 };

@@ -171,10 +171,7 @@ export default {
               this.$alert("暂无路线");
             }
           });
-
-          // alert("o(*￣▽￣*)ブ");
         } else {
-          // alert("/(ㄒoㄒ)/~~");
           return false;
         }
       });

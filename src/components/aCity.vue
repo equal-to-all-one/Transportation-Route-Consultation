@@ -152,7 +152,6 @@ export default {
   },
   methods: {
     showDetail(id) {
-      // console.log("要展示了(○´･д･)ﾉ");
       if (this.toShowId === id) {
         this.toShowId = "";
       } else {

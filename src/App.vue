@@ -39,7 +39,6 @@ export default {
   mounted() {
     let token = localStorage.getItem("admin_access");
     if (token) {
-      console.log(token);
       this.GLOBAL.hasLogin = true;
     }
   },

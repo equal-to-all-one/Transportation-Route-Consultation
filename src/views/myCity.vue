@@ -145,36 +145,41 @@ export default {
             data: {
               name: this.addForm.name,
             },
-          }).then((res) => {
-            console.log(res.data);
-            const list = [];
-            this.cityLs.map((city, index) => {
-              list.push({
-                cityA: res.data.id,
-                cityB: city.id,
-                distance: this.addForm.rawDistanceLs[index].km,
+          })
+            .then((res) => {
+              const list = [];
+              this.cityLs.map((city, index) => {
+                list.push({
+                  cityA: res.data.id,
+                  cityB: city.id,
+                  distance: this.addForm.rawDistanceLs[index].km,
+                });
               });
+              this.cityLs.push(res.data);
+              this.$axios({
+                method: "post",
+                url: "/transportation/distances/",
+                headers: {
+                  "Content-Type": "application/json",
+                  Authorization: `Bearer ${localStorage.getItem(
+                    "admin_access"
+                  )}`,
+                },
+                data: list,
+              }).then(() => {
+                this.addFormVisible = false;
+                this.resetForm(formName);
+                this.$message.success("新建成功");
+              });
+            })
+            .catch((error) => {
+              console.log(error);
+              this.$message.warning("城市名不可重复");
             });
-            this.cityLs.push(res.data);
-            console.log(list, "list");
-            this.$axios({
-              method: "post",
-              url: "/transportation/distances/",
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${localStorage.getItem("admin_access")}`,
-              },
-              data: list,
-            });
-            this.addFormVisible = false;
-          });
-          // alert("o(*￣▽￣*)ブ");
         } else {
-          // this.$message.error("/(ㄒoㄒ)/~~");
           return false;
         }
       });
-      this.resetForm(formName);
     },
     getDetailDistance() {},
     addDistance() {},
@@ -190,9 +195,8 @@ export default {
         },
       }).then((res) => {
         this.cityLs = res.data;
-        // console.log(this.cityLs);
+        this.$message.warning("已删除");
       });
-      // console.log("删了(p≧w≦q)");
     },
   },
 };

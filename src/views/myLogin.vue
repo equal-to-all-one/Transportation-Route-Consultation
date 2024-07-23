@@ -31,7 +31,6 @@ export default {
     if (this.GLOBAL.hasLogin) {
       localStorage.removeItem("admin_access");
       localStorage.removeItem("admin_refresh");
-      // alert("已退出登录");
       this.$message.info("已退出登录");
       this.GLOBAL.hasLogin = false;
     }
@@ -47,7 +46,6 @@ export default {
         data: this.form,
       })
         .then((res) => {
-          // console.log(res.data);
           localStorage.setItem("admin_access", res.data.access);
           localStorage.setItem("admin_refresh", res.data.refresh);
           this.$message.info("登录成功");
@@ -56,7 +54,7 @@ export default {
         })
         .catch((error) => {
           console.log(error);
-          this.$message.warning("密码错误");
+          this.$message.warning("信息错误");
         });
     },
   },

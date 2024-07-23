@@ -69,7 +69,8 @@ export default {
   },
   props: {
     flights: {
-      type: Array
+      type: Array,
+      required:true
     }
   },
   filters: {
