@@ -52,7 +52,7 @@ class FlightSerializer(serializers.ModelSerializer, BulkSerializerMixin):
     time_cost=serializers.SerializerMethodField()
     class Meta:
         model = FlightInfo
-        fields = ['price', 'mileage', 'departure_city_name', 'destination_city_name','departure_city',
+        fields = ['id', 'price', 'mileage', 'departure_city_name', 'destination_city_name','departure_city',
                   'destination_city','depart_time', 'arrive_time','time_cost']
         extra_kwargs = {
             'time_cost': {'read_only': True}
@@ -67,7 +67,7 @@ class FlightSerializer(serializers.ModelSerializer, BulkSerializerMixin):
     def get_time_cost(self,obj):
         hours, remainder = divmod(obj.time_cost.seconds, 3600)
         minutes, seconds = divmod(remainder, 60)
-        return 'hours: {} -- minutes: {:02}'.format(int(hours), int(minutes))
+        return 'hours: {} -- minutes: {}'.format(int(hours), int(minutes))
 
     def validate(self, data):
         if data['price'] <= 0:
